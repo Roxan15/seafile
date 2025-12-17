@@ -1,5 +1,4 @@
 services:
-
   db:
     image: mariadb:latest
     container_name: seafile-db
@@ -13,6 +12,8 @@ services:
       MYSQL_PASSWORD: seafilepassword
       TZ: Europe/Madrid
     restart: unless-stopped
+    networks:
+      - seafile-net
 
   redis:
     image: redis:latest
@@ -26,6 +27,16 @@ services:
     environment:
       REDIS_PASSWORD: redispass
     restart: unless-stopped
+    networks:
+      - seafile-net
+
+  memcached:
+    image: memcached:1.6
+    container_name: seafile-memcached
+    entrypoint: memcached -m 256
+    restart: unless-stopped
+    networks:
+      - seafile-net
     
   seafile:
     image: seafileltd/seafile-mc:13.0-latest
@@ -55,12 +66,21 @@ services:
        JWT_PRIVATE_KEY: dOxZYTTZgXKMHkqLBIQVImayQXAVWdzGBPuFJKggzcgvgPJPXpWzqzKaUOIOGGIr
        SEADOC_VOLUME: /opt/seadoc-data
        SEADOC_IMAGE: seafileltd/sdoc-server:2.0-latest
-       ENABLE_SEADOC: false #or true
+       ENABLE_SEADOC: false
        SEADOC_SERVER_URL: https://seafile.yourname.synology.me/sdoc-server
-       SEAFILE_SERVER_HOSTNAME: localhost:8200
+       SEAFILE_SERVER_HOSTNAME: 192.168.122.55
+       SEAFILE_SERVER_URL: http://192.168.122.55:8200
        SEAFILE_SERVER_PROTOCOL: http
-       FORCE_HTTPS_IN_CONF: false #true
+       FORCE_HTTPS_IN_CONF: false
        SEAFILE_SERVER_LETSENCRYPT: false
     depends_on:
       - db
       - redis
+      - memcached
+    restart: unless-stopped
+    networks:
+      - seafile-net
+
+networks:
+  seafile-net:
+    driver: bridge
