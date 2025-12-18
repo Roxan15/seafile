@@ -10,6 +10,7 @@ Instalación de Seafile usando Docker Compose para el servidor de OpenPyme, con 
 - OnlyOffice corriendo en http://192.168.122.55:8000
 
 ## 🏗️ Estructura del Proyecto
+```
 seafile/
 ├── docker-compose.yaml
 ├── install.sh
@@ -18,8 +19,7 @@ seafile/
 ├── .gitignore
 ├── db/ (creado automáticamente)
 └── data/ (creado automáticamente)
-
-
+```
 ## 🚀 Instalación
 
 ### Instalación Rápida (Recomendada)
