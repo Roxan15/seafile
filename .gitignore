@@ -1,0 +1,11 @@
+# Datos de Seafile (no subir al repo)
+db/
+data/
+
+# Logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.swp
+*~
