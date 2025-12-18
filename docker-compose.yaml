@@ -4,7 +4,7 @@ services:
     container_name: seafile-mysql
     restart: unless-stopped
     environment:
-      - MYSQL_ROOT_PASSWORD=MyS3cur3P@ssw0rd2024!
+      - MYSQL_ROOT_PASSWORD=mysql123
       - MYSQL_LOG_CONSOLE=true
       - MARIADB_AUTO_UPGRADE=1
     volumes:
@@ -32,9 +32,9 @@ services:
     command:
       - /bin/sh
       - -c
-      - redis-server --requirepass "R3d1sP@ss2024Secure!"
+      - redis-server --requirepass "redis123"
     environment:
-      - REDIS_PASSWORD=R3d1sP@ss2024Secure!
+      - REDIS_PASSWORD=redis123
     networks:
       - seafile-net
 
@@ -50,24 +50,24 @@ services:
       - SEAFILE_MYSQL_DB_HOST=db
       - SEAFILE_MYSQL_DB_PORT=3306
       - SEAFILE_MYSQL_DB_USER=seafile
-      - SEAFILE_MYSQL_DB_PASSWORD=S3af1l3DB#2024Pass
-      - INIT_SEAFILE_MYSQL_ROOT_PASSWORD=MyS3cur3P@ssw0rd2024!
+      - SEAFILE_MYSQL_DB_PASSWORD=seafiledb123
+      - INIT_SEAFILE_MYSQL_ROOT_PASSWORD=mysql123
       - SEAFILE_MYSQL_DB_CCNET_DB_NAME=ccnet_db
       - SEAFILE_MYSQL_DB_SEAFILE_DB_NAME=seafile_db
       - SEAFILE_MYSQL_DB_SEAHUB_DB_NAME=seahub_db
       - TIME_ZONE=America/Mexico_City
-      - INIT_SEAFILE_ADMIN_EMAIL=roxana.toral@openpyme.mx
-      - INIT_SEAFILE_ADMIN_PASSWORD=Adm1n$S3af1l3_2024
+      - INIT_SEAFILE_ADMIN_EMAIL=admin@openpyme.mx
+      - INIT_SEAFILE_ADMIN_PASSWORD=admin123
       - SEAFILE_SERVER_HOSTNAME=192.168.122.55:7024
       - SEAFILE_SERVER_PROTOCOL=http
       - SITE_ROOT=/
       - NON_ROOT=false
-      - JWT_PRIVATE_KEY=JWT_Pr1v@t3K3y_2024Secure!
+      - JWT_PRIVATE_KEY=jwt123456
       - SEAFILE_LOG_TO_STDOUT=false
       - CACHE_PROVIDER=redis
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - REDIS_PASSWORD=R3d1sP@ss2024Secure!
+      - REDIS_PASSWORD=redis123
       - ENABLE_NOTIFICATION_SERVER=false
       - INNER_NOTIFICATION_SERVER_URL=http://notification-server:8083
       - ENABLE_SEAFILE_AI=false
