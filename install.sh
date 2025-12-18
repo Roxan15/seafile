@@ -4,8 +4,8 @@ echo "🚀 Instalando Seafile con OnlyOffice para OpenPyme..."
 echo ""
 
 # Verificar que estamos en el directorio correcto
-if [ ! -f "docker-compose.yml" ]; then
-    echo "❌ Error: docker-compose.yml no encontrado"
+if [ ! -f "docker-compose.yaml" ]; then
+    echo "❌ Error: docker-compose.yaml no encontrado"
     echo "Ejecuta este script desde el directorio del proyecto"
     exit 1
 fi
