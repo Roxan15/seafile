@@ -80,35 +80,6 @@ services:
     networks:
       - seafile-net
 
-  onlyoffice-config:
-    image: alpine:latest
-    container_name: seafile-onlyoffice-config
-    restart: "no"
-    depends_on:
-      - seafile
-    networks:
-      - seafile-net
-    command: >
-      sh -c "
-      apk add --no-cache docker-cli &&
-      sleep 60 &&
-      docker exec seafile bash -c '
-      if ! grep -q \"ENABLE_ONLYOFFICE\" /opt/seafile/conf/seahub_settings.py; then
-        cat >> /opt/seafile/conf/seahub_settings.py << EOF
-
-# OnlyOffice Configuration
-ENABLE_ONLYOFFICE = True
-VERIFY_ONLYOFFICE_CERTIFICATE = False
-ONLYOFFICE_APIJS_URL = \"http://192.168.122.55:8000/web-apps/apps/api/documents/api.js\"
-ONLYOFFICE_FILE_EXTENSION = (\"doc\", \"docx\", \"ppt\", \"pptx\", \"xls\", \"xlsx\", \"odt\", \"fodt\", \"odp\", \"fodp\", \"ods\", \"fods\", \"csv\", \"ppsx\", \"pps\")
-ONLYOFFICE_EDIT_FILE_EXTENSION = (\"docx\", \"pptx\", \"xlsx\")
-ONLYOFFICE_JWT_SECRET = \"my_secret\"
-EOF
-        /scripts/enterpoint.sh python-wrapper /opt/seafile/seafile-server-latest/seahub.sh restart
-      fi
-      '
-      "
-
 networks:
   seafile-net:
     name: seafile-net
