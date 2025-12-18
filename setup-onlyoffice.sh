@@ -6,11 +6,11 @@ sleep 45
 echo "🔧 Configurando OnlyOffice en Seafile..."
 
 # Verificar si ya existe la configuración
-if docker exec seafile grep -q "ENABLE_ONLYOFFICE" /opt/seafile/conf/seahub_settings.py 2>/dev/null; then
+if sudo docker exec seafile grep -q "ENABLE_ONLYOFFICE" /opt/seafile/conf/seahub_settings.py 2>/dev/null; then
     echo "⚠️  OnlyOffice ya está configurado"
 else
     # Agregar configuración de OnlyOffice
-    docker exec seafile bash -c "cat >> /opt/seafile/conf/seahub_settings.py << 'EOF'
+    sudo docker exec seafile bash -c "cat >> /opt/seafile/conf/seahub_settings.py << 'EOF'
 
 # OnlyOffice Configuration
 ENABLE_ONLYOFFICE = True
@@ -22,7 +22,7 @@ ONLYOFFICE_JWT_SECRET = 'my_secret'
 EOF"
 
     echo "🔄 Reiniciando Seafile..."
-    docker restart seafile
+    sudo docker restart seafile
     
     echo "✅ OnlyOffice configurado correctamente"
     echo "📱 Accede a: http://192.168.122.55:7024"
