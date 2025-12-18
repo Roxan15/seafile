@@ -13,25 +13,33 @@ fi
 # Verificar si Docker está instalado
 if ! command -v docker &> /dev/null; then
     echo "❌ Error: Docker no está instalado"
+    echo "Instala Docker con: sudo dnf install docker-ce docker-ce-cli containerd.io -y"
     exit 1
 fi
 
-# Verificar si Docker Compose está instalado
-if ! command -v docker-compose &> /dev/null; then
-    echo "❌ Error: Docker Compose no está instalado"
+# Verificar que Docker esté corriendo
+if ! sudo docker info &> /dev/null; then
+    echo "❌ Error: Docker no está corriendo"
+    echo "Inicia Docker con: sudo systemctl start docker"
     exit 1
 fi
+
+# Verificar Docker Compose (V2)
+if ! sudo docker compose version &> /dev/null; then
+    echo "❌ Error: Docker Compose no está disponible"
+    exit 1
+fi
+
+echo "✅ Docker y Docker Compose detectados correctamente"
+echo ""
 
 # Dar permisos al script de OnlyOffice
 echo "🔐 Configurando permisos..."
 chmod +x setup-onlyoffice.sh
 
-# Crear directorio si no existe
-sudo mkdir -p /home/openpyme/seafile
-
 # Levantar servicios
 echo "📦 Levantando contenedores Docker..."
-sudo docker-compose up -d
+sudo docker compose up -d
 
 if [ $? -ne 0 ]; then
     echo "❌ Error al levantar los contenedores"
@@ -57,8 +65,8 @@ echo "🔑 Contraseña: admin123"
 echo ""
 echo "📋 Comandos útiles:"
 echo "  Ver logs:        sudo docker logs -f seafile"
-echo "  Estado:          sudo docker-compose ps"
-echo "  Reiniciar:       sudo docker-compose restart"
-echo "  Detener:         sudo docker-compose stop"
-echo "  Eliminar todo:   sudo docker-compose down -v"
+echo "  Estado:          sudo docker compose ps"
+echo "  Reiniciar:       sudo docker compose restart"
+echo "  Detener:         sudo docker compose stop"
+echo "  Eliminar todo:   sudo docker compose down -v"
 echo ""
