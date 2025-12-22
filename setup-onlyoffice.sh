@@ -15,7 +15,7 @@ else
 # OnlyOffice Configuration
 ENABLE_ONLYOFFICE = True
 VERIFY_ONLYOFFICE_CERTIFICATE = False
-ONLYOFFICE_APIJS_URL = 'http://192.168.122.55:8000/web-apps/apps/api/documents/api.js'
+ONLYOFFICE_APIJS_URL = 'https://docs.openpyme.mx/web-apps/apps/api/documents/api.js'
 ONLYOFFICE_FILE_EXTENSION = ('doc', 'docx', 'ppt', 'pptx', 'xls', 'xlsx', 'odt', 'fodt', 'odp', 'fodp', 'ods', 'fods', 'csv', 'ppsx', 'pps')
 ONLYOFFICE_EDIT_FILE_EXTENSION = ('docx', 'pptx', 'xlsx')
 ONLYOFFICE_JWT_SECRET = 'my_secret'
@@ -25,7 +25,7 @@ EOF"
     sudo docker restart seafile
     
     echo "✅ OnlyOffice configurado correctamente"
-    echo "📱 Accede a: http://192.168.122.55:7024"
+    echo "📱 Accede a: http://drive.openpyme.mx"
     echo "👤 Usuario: admin@openpyme.mx"
     echo "🔑 Contraseña: admin123"
 fi
