@@ -59,7 +59,7 @@ services:
       - INIT_SEAFILE_ADMIN_EMAIL=admin@openpyme.mx
       - INIT_SEAFILE_ADMIN_PASSWORD=admin123
       - SEAFILE_SERVER_HOSTNAME=drive.openpyme.mx #192.168.10.8:7024
-      - SEAFILE_SERVER_PROTOCOL=http
+      - SEAFILE_SERVER_PROTOCOL=https
       - SITE_ROOT=/
       - NON_ROOT=false
       - JWT_PRIVATE_KEY=jwt123456
@@ -83,4 +83,5 @@ services:
 networks:
   seafile-net:
     name: seafile-net
+
 
