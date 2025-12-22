@@ -25,7 +25,7 @@ EOF"
     sudo docker restart seafile
     
     echo "✅ OnlyOffice configurado correctamente"
-    echo "📱 Accede a: http://drive.openpyme.mx"
+    echo "📱 Accede a: https://drive.openpyme.mx"
     echo "👤 Usuario: admin@openpyme.mx"
     echo "🔑 Contraseña: admin123"
 fi
