@@ -7,7 +7,7 @@ Instalación de Seafile usando Docker Compose para el servidor de OpenPyme, con 
 - Docker instalado
 - Docker Compose V2 (incluido con Docker)
 - Puerto 7024 disponible
-- OnlyOffice corriendo en http://192.168.122.55:8000
+- OnlyOffice corriendo en http://docs.openpyme.mx
 
 ## 🏗️ Estructura del Proyecto
 ```
@@ -60,7 +60,7 @@ sudo docker compose up -d
 🔐 Credenciales de Acceso
 Seafile Web Interface
    
-   - URL: http://192.168.122.55:7024
+   - URL: http://drive.openpyme.mx
    - Usuario: admin@openpyme.mx
    - Contraseña: admin123
 Base de Datos MySQL
@@ -77,5 +77,5 @@ La integración con OnlyOffice se configura automáticamente con el script ```se
 
 Si necesitas configurarla manualmente:
 
-   - Document Server URL: ```http://192.168.122.55:8000/```
+   - Document Server URL: ```http://docs.openpyme.mx/```
    - JWT Secret: ```my_secret```
