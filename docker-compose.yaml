@@ -8,7 +8,7 @@ services:
       - MYSQL_LOG_CONSOLE=true
       - MARIADB_AUTO_UPGRADE=1
     volumes:
-      - "/home/openpyme/seafile/db:/var/lib/mysql"  # O tu ruta actual
+      - "/home/openpyme/seafile/db:/var/lib/mysql"
     networks:
       - seafile-net
     healthcheck:
@@ -38,6 +38,25 @@ services:
     networks:
       - seafile-net
 
+  collabora:
+    image: collabora/code:24.04.5.1.1
+    container_name: seafile-collabora
+    restart: unless-stopped
+    ports:
+      - "8000:9980"
+    environment:
+      - domain=192\\.168\\.122\\.55
+      - username=admin
+      - password=collabora123
+      - dictionaries=en_US es_MX
+      - extra_params=--o:ssl.enable=false --o:ssl.termination=false --o:storage.wopi.host=192.168.122.55 --o:net.post_allow.host=127.0.0.1
+      - DONT_GEN_SSL_CERT=true
+      - server_name=192.168.122.55:8000
+    cap_add:
+      - MKNOD
+    networks:
+      - seafile-net
+
   seafile:
     image: seafileltd/seafile-mc:13.0-latest
     container_name: seafile
@@ -45,7 +64,7 @@ services:
     ports:
       - "7024:80"
     volumes:
-      - /home/openpyme/seafile/data:/shared  # O tu ruta actual
+      - /home/openpyme/seafile/data:/shared
     environment:
       - SEAFILE_MYSQL_DB_HOST=db
       - SEAFILE_MYSQL_DB_PORT=3306
@@ -77,22 +96,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    networks:
-      - seafile-net
-
-  collabora:
-    image: collabora/code:latest
-    container_name: seafile-collabora
-    restart: unless-stopped
-    ports:
-      - "9980:9980"
-    environment:
-      - "aliasgroup1=http://192.168.122.55:7024"
-      - "username=admin"
-      - "password=collabora123"
-      - "extra_params=--o:ssl.enable=false --o:ssl.termination=false"
-    cap_add:
-      - MKNOD
+      collabora:
+        condition: service_started
     networks:
       - seafile-net
 
